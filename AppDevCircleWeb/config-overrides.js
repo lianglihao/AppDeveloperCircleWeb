@@ -11,11 +11,13 @@ module.exports = override(
   addDecoratorsLegacy(),                           // 使用mobx
   addWebpackAlias({                                // 配置路径
     '@': path.resolve(__dirname, 'src/'),
-    '@store': path.resolve(__dirname, 'src/store')
+    '@store': path.resolve(__dirname, 'src/store'),
+    '@models': path.resolve(__dirname, 'src/models'),
+    '@router': path.resolve(__dirname, 'src/router')
   }),
   fixBabelImports('import', {                      // 按需加载antd
     libraryName: 'antd',
     libraryDirectory: 'es',
-    style: true
+    style: 'css'
   })
 )

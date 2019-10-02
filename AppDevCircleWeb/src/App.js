@@ -1,16 +1,15 @@
-import React from 'react';
-import './App.css';
-import TodoList from './components/TodoList'
-import TodoForm from './components/TodoForm'
+import React from 'react'
+import Router from '@router/router'
+// import { Provider } from 'mobx-react'
+// import stores from './models'
 
 function App() {
   return (
     <div className="App">
-      <h3>Todo List</h3>
-      <TodoForm />
-      <TodoList />
+      <Router />
     </div>
   );
 }
 
-export default App;
+export default App
+
