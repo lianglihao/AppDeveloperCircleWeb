@@ -1,5 +1,3 @@
-
-
 module.exports = {
     mysql:{
         host:'localhost',
