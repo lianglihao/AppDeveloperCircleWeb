@@ -1,6 +1,6 @@
 const mysql = require('mysql');
-const dbConfig = require('./db');
-const sqlMap = require('./sqlMap');
+const dbConfig = require('../db');
+const sqlMap = require('../sqlMap');
 const fs = require('fs');
 const headimgpath = 'http://localhost:5000/headimg/';
 

@@ -1,6 +1,6 @@
 const mysql = require('mysql');
-const dbConfig = require('./db');
-const sqlMap = require('./sqlMap');
+const dbConfig = require('../db');
+const sqlMap = require('../sqlMap');
 const lastid = 2;
 
 const pool = mysql.createPool({

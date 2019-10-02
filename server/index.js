@@ -1,7 +1,7 @@
 const routerApi = require('./router');
 const bodyParser = require('body-parser'); // post 数据是需要
 const express = require('express');
-const uploadheadimg = require('./uploadheadimg');
+const uploadheadimg = require('./utils/uploadheadimg');
 const app = express();
 
 app.use(bodyParser.json());
