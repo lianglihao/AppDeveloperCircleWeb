@@ -1,0 +1,83 @@
+.loginHeader {
+  position: absolute;
+  top: 20px;
+  height: 40px;
+  width: 90%;
+  margin-left: 5%;
+  z-index: 100;
+  font-size: 0.5rem;
+  color: white;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  img {
+    height: 2rem;
+    width: 2rem;
+    animation: App-logo infinite 20s linear;
+    /* linear保持速度一致 */
+  }
+  button {
+    font-weight:bold;
+    width: 4.5rem;
+    height: 2rem;
+    background: none;
+    color: white;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    /* transition:all 0.6s;
+    -webkit-transition:all 0.6s; */
+    transition-property: background border-color;
+    -moz-transition-property: background border-color; /* Firefox 4 */
+    -webkit-transition-property:background border-color; /* Safari 和 Chrome */
+    -o-transition-property:background border-color; /* Opera */
+    transition-duration: 0.6s;
+    -moz-transition-duration: 0.6s; /* Firefox 4 */
+    -webkit-transition-duration: 0.6s; /* Safari 和 Chrome */
+    -o-transition-duration: 0.6s; /* Opera */
+    &:hover {
+        background: #00B4FF;
+        border-color: #00B4FF;
+        cursor: pointer;
+    }
+    &:focus {
+        outline: none;
+    }
+  }
+  
+}
+
+@keyframes App-logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes App-logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes App-logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes App-logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

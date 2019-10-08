@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Button } from 'antd'
+// import { Link } from 'react-router-dom'
+// import { Button } from 'antd'
 import { action } from 'mobx'
 import { observer, inject } from 'mobx-react'
-import LandPage from './LandPage'
+import LandPage from './component/LandPage'
+import Loginhead from './component/Loginhead'
 import styles from './style/login.module.sass'
 
 @inject('UserStore')
@@ -18,6 +19,7 @@ class Login extends Component {
   componentDidMount() {
     // document.title = '登录页'
     localStorage.removeItem('login')
+    console.log(this.props)
   }
 
   @action
@@ -41,13 +43,17 @@ class Login extends Component {
 
     return (
       <div className={styles.login}>
-        <p>Login</p>
-        <LandPage></LandPage>
-        <Link to="/">goHome</Link>
-        <Button onClick={this.login}
-          type="primary"
-        >登陆</Button>
-        <button onClick={this.logout}>退出</button>
+        <div className={styles.mask}>
+          <Loginhead></Loginhead>
+          <div className={styles.content}>
+            <LandPage></LandPage>
+          </div>
+          {/* <Link to="/">goHome</Link>
+          <Button onClick={this.login}
+            type="primary"
+          >登陆</Button>
+          <button onClick={this.logout}>退出</button> */}
+        </div>
       </div>
     )
   }

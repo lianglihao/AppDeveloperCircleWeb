@@ -13,7 +13,8 @@ module.exports = override(
     '@': path.resolve(__dirname, 'src/'),
     '@store': path.resolve(__dirname, 'src/store'),
     '@models': path.resolve(__dirname, 'src/models'),
-    '@router': path.resolve(__dirname, 'src/router')
+    '@router': path.resolve(__dirname, 'src/router'),
+    '@utils': path.resolve(__dirname, 'src/utils')
   }),
   fixBabelImports('import', {                      // 按需加载antd
     libraryName: 'antd',

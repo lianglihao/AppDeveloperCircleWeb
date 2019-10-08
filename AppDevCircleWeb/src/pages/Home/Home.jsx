@@ -21,7 +21,7 @@ class Home extends Component {
 
     return (
       <Fragment>
-        <h className="test">welcome {name}</h>
+        <p className="test">welcome {name}</p>
         <Link to="/login">goLogin</Link>
       </Fragment>
     )
