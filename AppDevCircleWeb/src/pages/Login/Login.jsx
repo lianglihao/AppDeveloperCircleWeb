@@ -5,6 +5,7 @@ import { action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import LandPage from './component/LandPage'
 import Loginhead from './component/Loginhead'
+import Loginfoot from './component/Loginfoot'
 import styles from './style/login.module.sass'
 
 @inject('UserStore')
@@ -19,7 +20,6 @@ class Login extends Component {
   componentDidMount() {
     // document.title = '登录页'
     localStorage.removeItem('login')
-    console.log(this.props)
   }
 
   @action
@@ -40,14 +40,16 @@ class Login extends Component {
   }
 
   render() {
+    const { history } = this.props
 
     return (
       <div className={styles.login}>
         <div className={styles.mask}>
           <Loginhead></Loginhead>
           <div className={styles.content}>
-            <LandPage></LandPage>
+            <LandPage history={history}/>
           </div>
+          <Loginfoot/>
           {/* <Link to="/">goHome</Link>
           <Button onClick={this.login}
             type="primary"

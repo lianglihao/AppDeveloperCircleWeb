@@ -4,6 +4,7 @@ import { action, observable, runInAction } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import styles from '../style/lpstyle.module.sass'
 
+@Form.create()
 @inject('UserStore')
 @observer
 class NormalLoginForm extends Component {
@@ -22,11 +23,13 @@ class NormalLoginForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        const { history, UserStore } = this.props
+
         console.log('Received values of form: ', values)
-        const { UserStore } = this.props
-        UserStore.setName('lianglihao')
+        UserStore.setName(values.username)
         localStorage.setItem('login', 1)
         console.log(this.props)
+        history.push('/')
       }
     });
   };
@@ -138,6 +141,7 @@ class NormalLoginForm extends Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
+// const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
 
-export default WrappedNormalLoginForm
+// export default WrappedNormalLoginForm
+export default NormalLoginForm
