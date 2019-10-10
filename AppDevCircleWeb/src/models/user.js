@@ -7,7 +7,6 @@ class UserStore {
   @action
   setName(name) {
     this.name = name
-    console.log(this.name)
   }
 }
 
