@@ -1,78 +1,93 @@
 import React, { Component, Fragment } from 'react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { action, observable, runInAction } from 'mobx'
+// import { action, observable, runInAction } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import styles from '../style/lpstyle.module.sass'
+import { Login } from '@api/login'
+import { observable } from 'mobx';
 
 @Form.create()
 @inject('UserStore')
 @observer
 class NormalLoginForm extends Component {
 
-  constructor(props) {
-    super(props)
-    this.ajax = this.ajax.bind(this)
-    this.debonce = this.debonce.bind(this)
-    this.handlechange = this.handlechange.bind(this)
-  }
+  // constructor(props) {
+  //   super(props)
+  //   // this.ajax = this.ajax.bind(this)
+  //   // this.debonce = this.debonce.bind(this)
+  //   // this.handlechange = this.handlechange.bind(this)
+  // }
+
+  // @observable
+  // uNameValidateStatus = ''
 
   @observable
-  uNameValidateStatus = ''
+  loading = false
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        const { history, UserStore } = this.props
+        this.login(values)
+        // const { history, UserStore } = this.props
 
-        console.log('Received values of form: ', values)
-        UserStore.setName(values.username)
-        localStorage.setItem('login', 1)
-        console.log(this.props)
-        history.push('/')
+        // console.log('Received values of form: ', values)
+        // UserStore.setName(values.username)
+        // localStorage.setItem('login', 1)
+        // console.log(this.props)
+        // history.push('/')
       }
     });
   };
 
-  @action
-  ajax(content) {
-    console.log(content)
-    let validateStatus = ''
-    if (content === 'lianglihao') {
-      validateStatus = 'success'
-    } else {
-      validateStatus = 'error'
+  login = async val => {
+    const params = {
+      uidentity: val.username,
+      upassword: val.password
     }
-    runInAction(() => {
-      this.uNameValidateStatus = validateStatus
-    })
+    const res = await Login(params)
+    console.log(res)
   }
 
-  @action
-  debonce(fun, delay) {
-    const that = this
+  // @action
+  // ajax(content) {
+  //   console.log(content)
+  //   let validateStatus = ''
+  //   if (content === 'lianglihao') {
+  //     validateStatus = 'success'
+  //   } else {
+  //     validateStatus = 'error'
+  //   }
+  //   runInAction(() => {
+  //     this.uNameValidateStatus = validateStatus
+  //   })
+  // }
 
-    return function(args) {
-      // that.uNameValidateStatus = 'validating'
-      runInAction(() => {
-        that.uNameValidateStatus = 'validating'
-      })
-      // var _this = this, _arguments = arguments
-      clearTimeout(fun.id)
-      fun.id = setTimeout(() => {
-        fun(args)
-        // fun.apply(_this, arguments)
-      }, delay)
-    }
-  }
+  // @action
+  // debonce(fun, delay) {
+  //   const that = this
 
-  handlechange(key, v) {
-    if (key === 'username' && v.target.value !== '') {
-      const inputDebonce = this.debonce(this.ajax, 1000)
-      inputDebonce(v.target.value)
-    }
+  //   return function(args) {
+  //     // that.uNameValidateStatus = 'validating'
+  //     runInAction(() => {
+  //       that.uNameValidateStatus = 'validating'
+  //     })
+  //     // var _this = this, _arguments = arguments
+  //     clearTimeout(fun.id)
+  //     fun.id = setTimeout(() => {
+  //       fun(args)
+  //       // fun.apply(_this, arguments)
+  //     }, delay)
+  //   }
+  // }
 
-  }
+  // handlechange(key, v) {
+  //   if (key === 'username' && v.target.value !== '') {
+  //     const inputDebonce = this.debonce(this.ajax, 1000)
+  //     inputDebonce(v.target.value)
+  //   }
+
+  // }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -93,7 +108,7 @@ class NormalLoginForm extends Component {
               rules: [{ required: true, message: 'Please input your username!' }]
             })(
               <Input
-                // onKeyUp={v => {this.handlechange('username', v)}}
+              // onKeyUp={v => {this.handlechange('username', v)}}
                 placeholder="Username"
                 prefix={
                   <Icon style={{ color: 'rgba(0,0,0,.25)' }}
@@ -129,6 +144,7 @@ class NormalLoginForm extends Component {
             </p>
             <Button className={styles.loginFormButton}
               htmlType="submit"
+              loading={this.loading}
               onClick={this.handleSubmit}
               type="primary"
             >

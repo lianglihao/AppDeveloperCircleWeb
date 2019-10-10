@@ -15,7 +15,8 @@ module.exports = override(
     '@models': path.resolve(__dirname, 'src/models'),
     '@router': path.resolve(__dirname, 'src/router'),
     '@utils': path.resolve(__dirname, 'src/utils'),
-    '@component': path.resolve(__dirname, 'src/components')
+    '@component': path.resolve(__dirname, 'src/components'),
+    '@api': path.resolve(__dirname, 'src/api'),
   }),
   fixBabelImports('import', {                      // 按需加载antd
     libraryName: 'antd',

@@ -4,3 +4,4 @@
 App.test.js
 serviceWorker.js
 config-overrides.js
+/public
