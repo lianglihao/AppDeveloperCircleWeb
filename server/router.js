@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const api = require('./api/api');
+const login = require('./api/user/login');
 
-router.get('/getValue', (req, res, next) => {
-  console.log(req, res, next)
-  api.getValue(req, res, next);
+router.post('/logIn', (req, res, next) => {
+  // console.log(req)
+  login.landingVerification(req, res, next);
 });
 
 // router.post('/setUpdate', (req, res, next) => {

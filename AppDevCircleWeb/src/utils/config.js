@@ -1,6 +1,7 @@
 const host = 'http://139.199.206.151:5000'
 export const API = process.env.NODE_ENV !== 'development' ? host : '/api'
 export const REQUEST_TIMEOUT = 15000
+export const NOTIFICATION_DURATION = 4
 export const HTTP_STATUS_DESC = {
   401: '登录状态过期, 需要重新登录',
   403: '没有相关权限',

@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox } from 'antd'
 // import { action, observable, runInAction } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import styles from '../style/lpstyle.module.sass'
 import { Login } from '@api/login'
-import { observable } from 'mobx';
+import { observable } from 'mobx'
+// import moment from 'moment'
 
 @Form.create()
 @inject('UserStore')
@@ -44,6 +45,7 @@ class NormalLoginForm extends Component {
     const params = {
       uidentity: val.username,
       upassword: val.password
+      // logintime: moment(new Date()).valueOf()
     }
     const res = await Login(params)
     console.log(res)

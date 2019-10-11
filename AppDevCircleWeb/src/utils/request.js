@@ -2,7 +2,7 @@ import axios from 'axios'
 import { startLoading, stopLoading } from '@utils/loading'
 import { message } from 'antd'
 import * as CONFIG from '@utils/config'
-import Catcher from '@utils/catcher'
+// import Catcher from '@utils/catcher'
 
 window.cancelTokenList = []
 const instance = axios.create({
@@ -26,16 +26,18 @@ const requestErroHandler = error => {
 }
 
 const responseHandler = response => {
+
+  console.log(response)
   stopLoading()
 
   window.cancelTokenList = window.cancelTokenList.filter(
     item => item.token !== response.config.cancelToken
   )
 
-  const { status } = response
+  // const { status } = response
 
-  if (status !== 200) Catcher(response)
-  if (status !== 200) console.log(response)
+  // if (status !== 200) Catcher(response)
+  // if (status !== 200) console.log(response)
 
   const { code, msg, info, data } = response.data
 
@@ -51,7 +53,7 @@ const responseHandler = response => {
 const responseErrorHandler = error => {
   stopLoading()
 
-  Catcher(error.response, true)
+  // Catcher(error.response, true)
   console.log(error.response, true)
 }
 

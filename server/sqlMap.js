@@ -1,4 +1,10 @@
 const sqlMap = {
+  // 登录验证
+  landingVerification: 'SELECT * FROM Users WHERE uidentity = ?',
+
+  // 更新登录状态
+  landingUpdate: 'UPDATE Users SET lastlogintime = ?,token = ? WHERE uidentity = ?'
+
   // setUpdate: 'UPDATE content SET title = ?,detailed= ?  WHERE id=?',
   // getContentAll: 'SELECT * FROM content WHERE userid = ? ORDER BY time DESC limit 12',
   // getUsers: 'SELECT * FROM users',

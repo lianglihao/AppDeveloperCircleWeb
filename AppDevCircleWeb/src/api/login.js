@@ -1,8 +1,8 @@
-import axios from 'axios'
+import Request from '@utils/request'
 import * as Config from '@utils/config'
 
 const API = Config.API
 
 export const Login = (data) => {
-  return axios.post(`${API}/logIn`, {...data})
+  return Request.post(`${API}/logIn`, {...data})
 }
