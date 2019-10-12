@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {Route, withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, withRouter } from 'react-router-dom';
+import { getStorage } from '@utils/storage'
 
 class PrivateRoute extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthenticated: window.localStorage.getItem('login') ? true : false
+      isAuthenticated: getStorage('token') ? true : false
     }
   }
 
@@ -20,7 +21,6 @@ class PrivateRoute extends Component {
 
   render() {
     const { component: Component, ...rest} = this.props;
-    console.log(this.props)
 
     return this.state.isAuthenticated ?
       (

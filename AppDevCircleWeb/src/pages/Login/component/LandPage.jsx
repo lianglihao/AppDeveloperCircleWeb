@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd'
-// import { action, observable, runInAction } from 'mobx'
+import { action, observable, runInAction } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import styles from '../style/lpstyle.module.sass'
 import { Login } from '@api/login'
-import { observable } from 'mobx'
-// import moment from 'moment'
+import { setStorage } from '@utils/storage'
 
 @Form.create()
 @inject('UserStore')
@@ -25,30 +24,34 @@ class NormalLoginForm extends Component {
   @observable
   loading = false
 
+  @action
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.login(values)
-        // const { history, UserStore } = this.props
-
-        // console.log('Received values of form: ', values)
-        // UserStore.setName(values.username)
-        // localStorage.setItem('login', 1)
-        // console.log(this.props)
-        // history.push('/')
+        this.loading = true
       }
     });
   };
 
   login = async val => {
+    const { history } = this.props
     const params = {
       uidentity: val.username,
       upassword: val.password
-      // logintime: moment(new Date()).valueOf()
     }
     const res = await Login(params)
-    console.log(res)
+
+    if (res) {
+      setStorage('token', res.token)
+      history.replace('/')
+    }
+
+    runInAction(() => {
+      this.loading = false
+    })
+
   }
 
   // @action

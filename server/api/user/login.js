@@ -32,6 +32,14 @@ module.exports = {
               }
             }
           )
+        } else {
+          res.json(
+            {
+              msg: '账号或密码错误',
+              code: 0,
+              data: null
+            }
+          )
         }
         connection.release();
       })

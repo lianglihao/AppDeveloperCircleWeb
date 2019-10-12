@@ -9,14 +9,14 @@ export function HttpBizError(message, request) {
   this.request = request
 }
 
-HttpBizError.prototype = new Error
+HttpBizError.prototype = new Error()
 
 export function HttpNetworkError(message) {
   this.name = 'HttpNetworkError'
   this.message = message
 }
 
-HttpNetworkError.prototype = new Error
+HttpNetworkError.prototype = new Error()
 
 function Catcher(response, isHttpError = false) {
   const duration = NOTIFICATION_DURATION

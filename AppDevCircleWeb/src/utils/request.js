@@ -26,8 +26,6 @@ const requestErroHandler = error => {
 }
 
 const responseHandler = response => {
-
-  console.log(response)
   stopLoading()
 
   window.cancelTokenList = window.cancelTokenList.filter(

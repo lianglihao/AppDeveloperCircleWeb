@@ -1,4 +1,5 @@
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 let count = 0
 
