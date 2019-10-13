@@ -3,7 +3,10 @@ const sqlMap = {
   landingVerification: 'SELECT * FROM Users WHERE uidentity = ?',
 
   // 更新登录状态
-  landingUpdate: 'UPDATE Users SET lastlogintime = ?,token = ? WHERE uidentity = ?'
+  landingUpdate: 'UPDATE Users SET lastlogintime = ?,token = ? WHERE uidentity = ?',
+
+  // 检查token是否过期
+  tokenExpired: 'SELECT lastlogintime FROM Users WHERE token = ?'
 
   // setUpdate: 'UPDATE content SET title = ?,detailed= ?  WHERE id=?',
   // getContentAll: 'SELECT * FROM content WHERE userid = ? ORDER BY time DESC limit 12',

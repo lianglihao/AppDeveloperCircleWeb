@@ -27,7 +27,13 @@ app.use('/api/uploadheadimg', uploadheadimg);
 // })
 
 io.on('connection', function(socket) {
-  console.log(socket)
+  socket.on('login', username => {
+    // console.log(username)
+    io.emit('test', username)
+  })
+  socket.on('disconnect', () => {
+    // console.log('lost one person')
+  })
 })
 
 // 配置允许跨域请求；

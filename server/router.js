@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const login = require('./api/user/login');
+const user = require('./api/user/verification');
 
+// 用户登陆
 router.post('/logIn', (req, res, next) => {
-  // console.log(req)
-  login.landingVerification(req, res, next);
+  user.landingVerification(req, res, next);
+});
+
+// 判断token是否过期
+router.post('/isexpired', (req, res, next) => {
+  user.tokenExpired(req, res, next);
 });
 
 // router.post('/setUpdate', (req, res, next) => {

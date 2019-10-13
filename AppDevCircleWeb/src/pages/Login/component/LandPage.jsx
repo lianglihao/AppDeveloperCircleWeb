@@ -3,8 +3,10 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd'
 import { action, observable, runInAction } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import styles from '../style/lpstyle.module.sass'
-import { Login } from '@api/login'
+import { Login } from '@api/verification'
 import { setStorage } from '@utils/storage'
+import io from 'socket.io-client';
+import { message } from 'antd'
 
 @Form.create()
 @inject('UserStore')
@@ -45,6 +47,11 @@ class NormalLoginForm extends Component {
 
     if (res) {
       setStorage('token', res.token)
+      const socket = io('http://localhost:5000');
+      socket.emit('login', res.username)
+      socket.on('test', uname => {
+        message.success(uname + '上线了')
+      })
       history.replace('/')
     }
 
