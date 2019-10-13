@@ -55,10 +55,7 @@ module.exports = {
     pool.getConnection((err, connection) => {
       const sql = sqlMap.landingUpdate
       connection.query(sql, [String(logintime), token, uidentity], (err) => {
-        console.log(123)
         if (err) {
-          console.log(err)
-
           return err
         }
         connection.release()

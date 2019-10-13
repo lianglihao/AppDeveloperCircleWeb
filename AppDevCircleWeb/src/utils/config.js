@@ -1,5 +1,6 @@
 const host = 'http://139.199.206.151:5000'
 export const API = process.env.NODE_ENV !== 'development' ? host : '/api'
+export const API_SOCKET = process.env.NODE_ENV !== 'development' ? host : 'http://127.0.0.1:5000'
 export const REQUEST_TIMEOUT = 15000
 export const NOTIFICATION_DURATION = 4
 export const HTTP_STATUS_DESC = {

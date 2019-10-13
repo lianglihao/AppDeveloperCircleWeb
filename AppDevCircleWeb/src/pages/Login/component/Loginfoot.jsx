@@ -9,7 +9,7 @@ class Loginfoot extends Component {
       color: '#fff',
       textAlign: 'center',
       position: 'fixed',
-      bottom: '0',
+      bottom: '10px',
       margin: '0 auto'
     }
 

@@ -3,6 +3,8 @@ const bodyParser = require('body-parser'); // post 数据是需要
 const express = require('express');
 const uploadheadimg = require('./utils/uploadheadimg');
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.use(bodyParser.json());
 // 后端api路由
@@ -22,8 +24,11 @@ app.use('/api/uploadheadimg', uploadheadimg);
 //   res.json({
 //       data: '后台返回结果 getArticle'
 //     });
-
 // })
+
+io.on('connection', function(socket) {
+  console.log(socket)
+})
 
 // 配置允许跨域请求；
 app.all('*', function(req, res, next) {
@@ -37,6 +42,6 @@ app.all('*', function(req, res, next) {
 // 监听端口
 const port = 5000;
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Server started on 。。 ${port}`);
 })

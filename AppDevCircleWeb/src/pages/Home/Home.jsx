@@ -16,12 +16,15 @@ class Home extends Component {
     this.openDrawer = this.openDrawer.bind(this)
   }
 
-  // UNSAFE_componentWillMount() {
-  //   // document.title = '首页'
-  // }
+  UNSAFE_componentWillMount() {
+    document.title = '小圈子'
+  }
 
   @observable
   drawerVis = false
+
+  @observable
+  socket = null
 
   @action
   closeDrawer() {
