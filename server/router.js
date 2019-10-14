@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const user = require('./api/user/verification');
+const verification = require('./api/user/verification');
+const user = require('./api/user/user')
 
 // 用户登陆
 router.post('/logIn', (req, res, next) => {
-  user.landingVerification(req, res, next);
+  verification.landingVerification(req, res, next);
 });
 
 // 判断token是否过期
 router.post('/isexpired', (req, res, next) => {
-  user.tokenExpired(req, res, next);
+  verification.tokenExpired(req, res, next);
+});
+
+// 获取好友
+router.post('/getfriends', (req, res, next) => {
+  user.getFriends(req, res, next);
 });
 
 // router.post('/setUpdate', (req, res, next) => {

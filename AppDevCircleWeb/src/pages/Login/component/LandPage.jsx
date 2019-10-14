@@ -52,6 +52,8 @@ class NormalLoginForm extends Component {
       socket.on('test', uname => {
         message.success(uname + '上线了')
       })
+      const { UserStore } = this.props
+      UserStore.setName(res.username)
       history.replace('/')
     }
 

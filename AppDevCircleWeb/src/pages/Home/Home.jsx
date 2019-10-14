@@ -4,6 +4,7 @@ import { action, observable } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import Drawerhome from '@component/drawer/Drawerpkg'
 import { Button } from 'antd'
+import { getStorage } from '@utils/storage'
 
 @inject('UserStore')
 @observer
@@ -37,6 +38,10 @@ class Home extends Component {
   }
 
   homeDrawerContent = () => {
+    const { UserStore } = this.props
+    const { getFriends } = UserStore
+    getFriends(getStorage('token'))
+
     return (
       <Fragment>
         <p>Some contents...</p>
@@ -60,11 +65,11 @@ class Home extends Component {
 
   render() {
     const { UserStore } = this.props
-    const { name } = UserStore
+    const { uname } = UserStore
 
     return (
       <Fragment>
-        <p className="test">welcome {name}</p>
+        <p className="test">welcome {uname}</p>
         <Link to="/login">goLogin</Link>
         <Button onClick={this.openDrawer}>打开列表</Button>
 

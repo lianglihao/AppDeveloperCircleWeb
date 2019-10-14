@@ -6,7 +6,13 @@ const sqlMap = {
   landingUpdate: 'UPDATE Users SET lastlogintime = ?,token = ? WHERE uidentity = ?',
 
   // 检查token是否过期
-  tokenExpired: 'SELECT lastlogintime FROM Users WHERE token = ?'
+  tokenExpired: 'SELECT lastlogintime FROM Users WHERE token = ?',
+
+  // 获取好友
+  getFriends: 'SELECT friendsid FROM Users WHERE token = ?',
+
+  // 获取用户基础信息（头像）
+  getPicture: 'SELECT uname, uidentity, picture FROM Users WHERE uidentity = ?',
 
   // setUpdate: 'UPDATE content SET title = ?,detailed= ?  WHERE id=?',
   // getContentAll: 'SELECT * FROM content WHERE userid = ? ORDER BY time DESC limit 12',

@@ -1,12 +1,26 @@
 import { observable, action } from 'mobx';
+import { getFriends } from '@api/user'
 
 class UserStore {
   @observable
-  name = ''
+  uname = ''
+
+  @observable
+  friends = []
 
   @action
-  setName(name) {
-    this.name = name
+  setName(uname) {
+    this.uname = uname
+  }
+
+  @action
+  async getFriends(token) {
+    console.log(token)
+    const params = {
+      token
+    }
+    const res = await getFriends(params)
+    console.log(res)
   }
 }
 
