@@ -1,6 +1,44 @@
 const sqlMap = require('../../sqlMap');
 const pool = require('../api')
 
+const resultArr = []
+
+function asyncRandom(id) {
+  return new Promise(function(resolve, reject) {
+    // setTimeout(resolve, 100, Math.floor(Math.random() * 100) + 1);
+    try {
+      getPicture(id, (result) => {
+        resolve(result)
+      })
+    } catch(err) {
+      reject(err)
+    }
+  });
+}
+
+const getPicture = (id, callback) => {
+  pool.getConnection((err, connection) => {
+    const sql = sqlMap.getPicture
+    connection.query(sql, [id], (err, result) => {
+      if (err) {
+        return err
+      }
+      callback(result[0])
+      connection.release()
+    })
+  })
+}
+
+function getAllFriends(arr) {
+  const promises = [];
+  const handleNumber = n => resultArr.push(n);
+  for (let i = 0; i < arr.length; i += 1) {
+    promises.push(asyncRandom(arr[i]).then(handleNumber));
+  }
+
+  return promises;
+}
+
 module.exports = {
   // 获取好友
   getFriends(req, res) {
@@ -11,29 +49,40 @@ module.exports = {
         if (err) {
           return err
         }
-        const resultArr = []
+        // const resultArr = []
         const friendsArr = result[0].friendsid.split('$.$-')
-        for (let i = 0; i < friendsArr.length; i += 1) {
-          this.getPicture(friendsArr[i], (result) => {
-            console.log(result)
-            resultArr.push(result)
-            console.log(resultArr, 2)
-            // return result
+        Promise.all(getAllFriends(friendsArr)).then(() => {
+          res.json({
+            msg: '获取好友成功',
+            code: 200,
+            data: resultArr
           })
-          if (i === friendsArr.length - 1) {
-            console.log(123)
-            res.json(
-              {
-                msg: '登陆成功',
-                code: 200,
-                data: {
-                  resultArr
-                }
-              }
-            )
-          }
-          // resultArr.push(obj)
-        }
+        })
+        // for (let i = 0; i < friendsArr.length; i += 1) {
+        //   // this.getPicture(friendsArr[i], (result) => {
+        //   //   console.log(result)
+        //   // })
+        //   // if (i === friendsArr.length - 1) {
+        //   //   console.log(123)
+        //   //   res.json(
+        //   //     {
+        //   //       msg: '登陆成功',
+        //   //       code: 200,
+        //   //       data: {
+        //   //         resultArr
+        //   //       }
+        //   //     }
+        //   //   )
+        //   // }
+        //   // resultArr.push(obj)
+        // }
+        // res.json({
+        //   msg: '获取好友成功',
+        //   code: 200,
+        //   data: {
+
+        //   }
+        // })
         // const resultArr = []
         // friendsArr.forEach(item => {
 
@@ -62,16 +111,16 @@ module.exports = {
   },
 
   // 获取好友信息（头像）
-  getPicture(id, callback) {
-    pool.getConnection((err, connection) => {
-      const sql = sqlMap.getPicture
-      connection.query(sql, [id], (err, result) => {
-        if (err) {
-          return err
-        }
-        callback(result[0])
-        connection.release()
-      })
-    })
-  }
+  // getPicture(id, callback) {
+  //   pool.getConnection((err, connection) => {
+  //     const sql = sqlMap.getPicture
+  //     connection.query(sql, [id], (err, result) => {
+  //       if (err) {
+  //         return err
+  //       }
+  //       callback(result[0])
+  //       connection.release()
+  //     })
+  //   })
+  // }
 }
