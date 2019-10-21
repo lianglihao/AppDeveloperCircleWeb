@@ -33,7 +33,7 @@ class PrivateRoute extends Component {
   }
 
   render() {
-    const { component: Component, ...rest} = this.props;
+    const { component: Component, ...rest} = this.props
 
     return this.state.isAuthenticated ?
       (
