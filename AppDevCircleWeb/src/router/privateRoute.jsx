@@ -13,7 +13,7 @@ class PrivateRoute extends Component {
 
   UNSAFE_componentWillMount() {
     const {history} = this.props;
-    console.log(history)
+
     if(!this.state.isAuthenticated) {
       setTimeout(() => {
         history.replace('/login');

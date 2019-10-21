@@ -67,7 +67,7 @@ module.exports = {
   // 验证token是否过期
   tokenExpired(req, res) {
     const { token } = req.body
-    pool.getConnection((err, connection) => {
+    const test = () => pool.getConnection((err, connection) => {
       const sql = sqlMap.tokenExpired
       connection.query(sql, token, (err, result) => {
         if (err) {
@@ -96,5 +96,9 @@ module.exports = {
         connection.release()
       })
     })
+
+    setTimeout(()=>{
+      test()
+    }, 2000)
   }
 }

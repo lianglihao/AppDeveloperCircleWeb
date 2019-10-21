@@ -9,8 +9,8 @@ export const Login = (data) => {
 }
 
 // token验证
-export const Tokenexpired = async(data) => {
-  const res = await Request.post(`${API}/isexpired`, {...data})
+export const Tokenexpired = (data) => {
+  const res = Request.post(`${API}/isexpired`, {...data})
 
   return res
 }

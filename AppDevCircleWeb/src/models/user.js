@@ -15,7 +15,6 @@ class UserStore {
 
   @action
   async getFriends(token) {
-    console.log(token)
     const params = {
       token
     }
