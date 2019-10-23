@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
-import { getStorage, deleteStorage } from '@utils/storage'
-import { Tokenexpired } from '@api/verification'
+import React, { Component } from 'react'
+import { Route, withRouter } from 'react-router-dom'
+import { getStorage } from '@utils/storage'
 
 class PrivateRoute extends Component {
   constructor(props) {
@@ -18,18 +17,19 @@ class PrivateRoute extends Component {
       setTimeout(() => {
         history.replace('/login');
       }, 1000)
-    } else {
-      const params = {
-        token: getStorage('token')
-      }
-      const res = Tokenexpired(params)
-      res.then(response => {
-        if (!response) {
-          deleteStorage('token')
-          history.replace('login')
-        }
-      })
     }
+    // else {
+    //   const params = {
+    //     token: getStorage('token')
+    //   }
+    //   const res = Tokenexpired(params)
+    //   res.then(response => {
+    //     if (!response) {
+    //       deleteStorage('token')
+    //       history.replace('login')
+    //     }
+    //   })
+    // }
   }
 
   render() {
@@ -46,4 +46,4 @@ class PrivateRoute extends Component {
   }
 }
 
-export default withRouter(PrivateRoute);
+export default withRouter(PrivateRoute)

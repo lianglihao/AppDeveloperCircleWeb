@@ -2,6 +2,7 @@ import axios from 'axios'
 import { startLoading, stopLoading } from '@utils/loading'
 import { message } from 'antd'
 import * as CONFIG from '@utils/config'
+import { deleteStorage } from '@utils/storage'
 // import Catcher from '@utils/catcher'
 
 window.cancelTokenList = []
@@ -41,6 +42,13 @@ const responseHandler = response => {
 
   if (code !== 200) {
     message.error(msg || info, 2)
+
+    if (code === 100) {
+      console.log(code)
+      deleteStorage('token')
+      // window.history.replaceState(null, null, 'login')
+      window.location.replace('login')
+    }
 
     return false
   }

@@ -2,7 +2,7 @@ const sqlMap = require('../../sqlMap');
 const pool = require('../api')
 
 function asyncRandom(id) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     try {
       getPicture(id, (result) => {
         resolve(result)
@@ -15,6 +15,9 @@ function asyncRandom(id) {
 
 const getPicture = (id, callback) => {
   pool.getConnection((err, connection) => {
+    if (err) {
+      return err
+    }
     const sql = sqlMap.getPicture
     connection.query(sql, [id], (err, result) => {
       if (err) {
@@ -31,7 +34,7 @@ function getAllFriends(arr, resultArr) {
   const handleNumber = n => resultArr.push(n)
 
   for (let i = 0; i < arr.length; i += 1) {
-    promises.push(asyncRandom(arr[i]).then(handleNumber))
+    promises.push(asyncRandom(arr[i]).then(handleNumber).catch(err => {throw new Error(err)}))
   }
 
   return promises;
@@ -42,6 +45,9 @@ module.exports = {
   getFriends(req, res) {
     const { token } = req.body
     pool.getConnection((err, connection) => {
+      if (err) {
+        return err
+      }
       const sql = sqlMap.getFriends
       connection.query(sql, [token], (err, result) => {
         if (err) {
@@ -55,6 +61,8 @@ module.exports = {
             code: 200,
             data: resultArr
           })
+        }).catch(err=>{
+          return new Error(err)
         })
         connection.release();
       })

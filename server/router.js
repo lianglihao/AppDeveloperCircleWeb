@@ -3,6 +3,22 @@ const router = express.Router();
 const verification = require('./api/user/verification');
 const user = require('./api/user/user')
 
+const tokenExpired = ( (token, res, func) => {
+  verification.tokenExpired(token, (response) => {
+    if (!response) {
+      func
+    } else {
+      res.json(
+        {
+          msg: 'token过期，请重新登陆',
+          code: 100,
+          data: false
+        }
+      )
+    }
+  })
+})
+
 // 用户登陆
 router.post('/logIn', (req, res, next) => {
   verification.landingVerification(req, res, next);
@@ -15,7 +31,23 @@ router.post('/isexpired', (req, res, next) => {
 
 // 获取好友
 router.post('/getfriends', (req, res, next) => {
-  user.getFriends(req, res, next);
+  const { token } = req.body
+  const func = user.getFriends(req, res, next);
+  tokenExpired(token, res, func)
+  // verification.tokenExpired(token, (response) => {
+  //   if (!response) {
+  //     user.getFriends(req, res, next);
+  //   } else {
+  //     res.json(
+  //       {
+  //         msg: 'token过期，请重新登陆',
+  //         code: 100,
+  //         data: false
+  //       }
+  //     )
+  //   }
+  // })
+  // user.getFriends(req, res, next);
 });
 
 // router.post('/setUpdate', (req, res, next) => {

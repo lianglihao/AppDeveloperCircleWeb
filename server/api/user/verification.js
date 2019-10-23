@@ -8,6 +8,9 @@ module.exports = {
     const md5 = require('js-md5')
     const { uidentity, upassword } = req.body
     pool.getConnection((err, connection) => {
+      if (err) {
+        return err
+      }
       const sql = sqlMap.landingVerification
       connection.query(sql, [uidentity], (err, result) => {
         const realResult = result[0]
@@ -54,6 +57,9 @@ module.exports = {
       uidentity
     } = e
     pool.getConnection((err, connection) => {
+      if (err) {
+        return err
+      }
       const sql = sqlMap.landingUpdate
       connection.query(sql, [String(logintime), token, uidentity], (err) => {
         if (err) {
@@ -65,9 +71,47 @@ module.exports = {
   },
 
   // 验证token是否过期
-  tokenExpired(req, res) {
-    const { token } = req.body
+  // tokenExpired(req, res) {
+  //   const { token } = req.body
+  //   const test = () => pool.getConnection((err, connection) => {
+  //     const sql = sqlMap.tokenExpired
+  //     connection.query(sql, token, (err, result) => {
+  //       if (err) {
+  //         return err
+  //       }
+  //       const logintime = moment(new Date()).valueOf()
+  //       const timeRange = logintime - result[0].lastlogintime
+
+  //       if (timeRange > 600000) {
+  //         res.json(
+  //           {
+  //             msg: 'token过期，请重新登陆',
+  //             code: 0,
+  //             data: false
+  //           }
+  //         )
+  //       } else {
+  //         res.json(
+  //           {
+  //             msg: '',
+  //             code: 200,
+  //             data: true
+  //           }
+  //         )
+  //       }
+  //       connection.release()
+  //     })
+  //   })
+
+  //   setTimeout(()=>{
+  //     test()
+  //   }, 2000)
+  // }
+  tokenExpired(token, callback) {
     const test = () => pool.getConnection((err, connection) => {
+      if (err) {
+        return err
+      }
       const sql = sqlMap.tokenExpired
       connection.query(sql, token, (err, result) => {
         if (err) {
@@ -76,29 +120,31 @@ module.exports = {
         const logintime = moment(new Date()).valueOf()
         const timeRange = logintime - result[0].lastlogintime
 
-        if (timeRange > 600000) {
-          res.json(
-            {
-              msg: 'token过期，请重新登陆',
-              code: 0,
-              data: false
-            }
-          )
-        } else {
-          res.json(
-            {
-              msg: '',
-              code: 200,
-              data: true
-            }
-          )
-        }
+        callback(timeRange > 10000)
+
+        // if (timeRange > 600000) {
+        //   res.json(
+        //     {
+        //       msg: 'token过期，请重新登陆',
+        //       code: 0,
+        //       data: false
+        //     }
+        //   )
+        // } else {
+        //   res.json(
+        //     {
+        //       msg: '',
+        //       code: 200,
+        //       data: true
+        //     }
+        //   )
+        // }
         connection.release()
       })
     })
-
-    setTimeout(()=>{
-      test()
-    }, 2000)
+    test()
+    // setTimeout(()=>{
+    //   test()
+    // }, 2000)
   }
 }
