@@ -120,7 +120,7 @@ module.exports = {
         const logintime = moment(new Date()).valueOf()
         const timeRange = logintime - result[0].lastlogintime
 
-        callback(timeRange > 10000)
+        callback(timeRange > 600000)
 
         // if (timeRange > 600000) {
         //   res.json(

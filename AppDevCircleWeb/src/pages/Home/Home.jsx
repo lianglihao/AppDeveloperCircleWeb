@@ -37,21 +37,25 @@ class Home extends Component {
     this.drawerVis = true
   }
 
-  homeDrawerContent = () => {
+  // homeDrawerContent = () => {
+  //   const { UserStore } = this.props
+  //   const { getFriends } = UserStore
+  //   getFriends(getStorage('token'))
+
+  //   return (
+  //     <Fragment>
+  //       <p>Some contents...</p>
+  //       <p>Some contents...</p>
+  //       <p>Some contents...</p>
+  //     </Fragment>
+  //   )
+  // }
+
+  homeDrawer = () => {
     const { UserStore } = this.props
     const { getFriends } = UserStore
     getFriends(getStorage('token'))
 
-    return (
-      <Fragment>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Fragment>
-    )
-  }
-
-  homeDrawer = () => {
     return (
       <Drawerhome
         closable={false}

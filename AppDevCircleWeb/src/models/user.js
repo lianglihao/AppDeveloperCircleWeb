@@ -6,7 +6,7 @@ class UserStore {
   uname = ''
 
   @observable
-  friends = []
+  friends = null
 
   @action
   setName(uname) {
@@ -19,7 +19,7 @@ class UserStore {
       token
     }
     const res = await getFriends(params)
-    console.log(res)
+    this.friends = res
   }
 }
 
