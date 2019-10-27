@@ -26,7 +26,7 @@ router.post('/logIn', (req, res, next) => {
 
 // 判断token是否过期
 router.post('/isexpired', (req, res, next) => {
-  verification.tokenExpired(req, res, next);
+  verification.tokenExpiredOnly(req, res, next);
 });
 
 // 获取好友

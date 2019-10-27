@@ -14,12 +14,16 @@ class UserStore {
   }
 
   @action
-  async getFriends(token) {
+  updateFriends(array) {
+    this.friends = array;
+  }
+
+  getFriends = async(token) => {
     const params = {
       token
     }
     const res = await getFriends(params)
-    this.friends = res
+    this.updateFriends(res)
   }
 }
 

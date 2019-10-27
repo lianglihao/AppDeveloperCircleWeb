@@ -120,7 +120,7 @@ module.exports = {
         const logintime = moment(new Date()).valueOf()
         const timeRange = logintime - result[0].lastlogintime
 
-        callback(timeRange > 600000)
+        callback(timeRange > 10000)
 
         // if (timeRange > 600000) {
         //   res.json(
@@ -146,5 +146,39 @@ module.exports = {
     // setTimeout(()=>{
     //   test()
     // }, 2000)
+  },
+  tokenExpiredOnly(req, res) {
+    const { token } = req.body
+    pool.getConnection((err, connection) => {
+      if (err) {
+        return err
+      }
+      const sql = sqlMap.tokenExpired
+      connection.query(sql, [token], (err, result) => {
+        if (err) {
+          return err
+        }
+        const logintime = moment(new Date()).valueOf()
+        const timeRange = logintime - result[0].lastlogintime
+        if (timeRange > 10000) {
+          res.json(
+            {
+              msg: 'token过期，请重新登陆',
+              code: 0,
+              data: false
+            }
+          )
+        } else {
+          res.json(
+            {
+              msg: '',
+              code: 200,
+              data: true
+            }
+          )
+        }
+        connection.release();
+      })
+    })
   }
 }

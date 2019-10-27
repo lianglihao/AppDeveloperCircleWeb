@@ -2,8 +2,9 @@ import axios from 'axios'
 import { startLoading, stopLoading } from '@utils/loading'
 import { message } from 'antd'
 import * as CONFIG from '@utils/config'
-import { deleteStorage } from '@utils/storage'
+// import { deleteStorage } from '@utils/storage'
 // import Catcher from '@utils/catcher'
+// import createHistory from 'history/createBrowserHistory'
 
 window.cancelTokenList = []
 const instance = axios.create({
@@ -43,12 +44,16 @@ const responseHandler = response => {
   if (code !== 200) {
     message.error(msg || info, 2)
 
-    if (code === 100) {
-      console.log(code)
-      deleteStorage('token')
-      // window.history.replaceState(null, null, 'login')
-      window.location.replace('login')
-    }
+    // if (code === 100) {
+    //   console.log(code)
+    //   deleteStorage('token')
+    //   // window.history.replaceState(null, null, 'login')
+    //   // window.location.replace('login')
+    //   // window.history.replaceState(null, null, 'login')
+    //   const history = createHistory();
+    //   console.log(history)
+    //   history.replace('login')
+    // }
 
     return false
   }

@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { action, observable } from 'mobx'
 import { observer, inject } from 'mobx-react'
-import Drawerhome from '@component/drawer/Drawerpkg'
+// import Drawerhome from '@component/drawer/Drawerpkg'
 import { Button } from 'antd'
 import { getStorage } from '@utils/storage'
+import FriendsList from './component/FriendsList'
 
 @inject('UserStore')
 @observer
@@ -19,6 +20,9 @@ class Home extends Component {
 
   UNSAFE_componentWillMount() {
     document.title = '小圈子'
+    const { UserStore } = this.props
+    const { getFriends } = UserStore
+    getFriends(getStorage('token'))
   }
 
   @observable
@@ -34,6 +38,9 @@ class Home extends Component {
 
   @action
   openDrawer() {
+    // const { UserStore } = this.props
+    // const { getFriends } = UserStore
+    // getFriends(getStorage('token'))
     this.drawerVis = true
   }
 
@@ -51,21 +58,18 @@ class Home extends Component {
   //   )
   // }
 
-  homeDrawer = () => {
-    const { UserStore } = this.props
-    const { getFriends } = UserStore
-    getFriends(getStorage('token'))
+  // homeDrawer = () => {
 
-    return (
-      <Drawerhome
-        closable={false}
-        content={this.homeDrawerContent}
-        onClose={this.closeDrawer}
-        title="好友列表"
-        visible={this.drawerVis}
-      />
-    )
-  }
+  //   return (
+  //     <Drawerhome
+  //       closable={false}
+  //       content={this.FriendsList}
+  //       onClose={this.closeDrawer}
+  //       title="好友列表"
+  //       visible={this.drawerVis}
+  //     />
+  //   )
+  // }
 
   render() {
     const { UserStore } = this.props
@@ -76,10 +80,10 @@ class Home extends Component {
         <p className="test">welcome {uname}</p>
         <Link to="/login">goLogin</Link>
         <Button onClick={this.openDrawer}>打开列表</Button>
-
-        {
-          this.homeDrawer()
-        }
+        <FriendsList
+          onClose={this.closeDrawer}
+          visible={this.drawerVis}
+        />
       </Fragment>
     )
   }

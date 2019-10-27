@@ -15,10 +15,11 @@ class Login extends Component {
   //   super(props)
   //   this.login = this.login.bind(this)
   // }
-
   componentDidMount() {
     document.title = '登录页'
-    localStorage.removeItem('login')
+    // localStorage.removeItem('token')
+    const { history } = this.props
+    console.log(history)
   }
 
   // @action
