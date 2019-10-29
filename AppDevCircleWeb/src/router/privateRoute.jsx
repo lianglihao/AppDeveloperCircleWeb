@@ -27,7 +27,6 @@ class PrivateRoute extends Component {
       res.then(response => {
         console.log(response)
         if (!response) {
-          console.log(history)
           deleteStorage('token')
           history.replace('login')
         }

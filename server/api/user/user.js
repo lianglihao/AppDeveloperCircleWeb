@@ -43,7 +43,8 @@ function getAllFriends(arr, resultArr) {
 module.exports = {
   // 获取好友
   getFriends(req, res) {
-    const { token } = req.body
+    const { token, count } = req.body
+    console.log(count)
     pool.getConnection((err, connection) => {
       if (err) {
         return err

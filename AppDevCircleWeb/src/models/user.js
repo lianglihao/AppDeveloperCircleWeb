@@ -6,7 +6,10 @@ class UserStore {
   uname = ''
 
   @observable
-  friends = null
+  friends = []
+
+  @observable
+  friendsCount = 1
 
   @action
   setName(uname) {
@@ -15,14 +18,16 @@ class UserStore {
 
   @action
   updateFriends(array) {
-    this.friends = array;
+    this.friends = this.friends.concat(array)
   }
 
   getFriends = async(token) => {
     const params = {
-      token
+      token,
+      count: this.friendsCount
     }
     const res = await getFriends(params)
+    console.log(params)
     this.updateFriends(res)
   }
 }
