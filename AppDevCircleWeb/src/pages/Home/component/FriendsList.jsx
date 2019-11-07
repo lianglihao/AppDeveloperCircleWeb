@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 // import { Link } from 'react-router-dom'
-import { action, observable } from 'mobx'
+import { observable } from 'mobx'
 import { observer, inject } from 'mobx-react'
 // import Drawerhome from '@component/drawer/Drawerpkg'
 // import { Button } from 'antd'
@@ -34,6 +34,21 @@ class FriendsList extends Component {
             return <p key={index}>{item.name}</p>
           })
         }
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
