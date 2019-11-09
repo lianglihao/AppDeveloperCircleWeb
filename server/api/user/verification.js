@@ -14,7 +14,7 @@ module.exports = {
       const sql = sqlMap.landingVerification
       connection.query(sql, [uidentity], (err, result) => {
         const realResult = result[0]
-        if (realResult.upassword === upassword) {
+        if (realResult && realResult.upassword === upassword) {
           const logintime = moment(new Date()).valueOf()
           const hash = md5.create()
           hash.update(`${realResult.uname}${realResult.uidentity}`)

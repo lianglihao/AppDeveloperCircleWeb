@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 // import { Button } from 'antd'
 import { observer } from 'mobx-react'
 import { Drawer } from 'antd'
+import './drawerpkg.scss'
 
 @observer
 class Drawerpkg extends Component {
@@ -24,7 +25,8 @@ class Drawerpkg extends Component {
       title = '',
       visible = false,
       content = this.content,
-      placement = 'right'} = this.props
+      placement = 'right',
+      width = '256'} = this.props
 
     return (
       <Drawer
@@ -33,6 +35,7 @@ class Drawerpkg extends Component {
         placement={placement}
         title={title}
         visible={visible}
+        width={width}
       >
         {
           content()

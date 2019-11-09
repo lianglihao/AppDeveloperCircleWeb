@@ -13,23 +13,15 @@ import { setStorage } from '@utils/storage'
 @observer
 class NormalLoginForm extends Component {
 
-  // constructor(props) {
-  //   super(props)
-  //   // this.ajax = this.ajax.bind(this)
-  //   // this.debonce = this.debonce.bind(this)
-  //   // this.handlechange = this.handlechange.bind(this)
-  // }
-
-  // @observable
-  // uNameValidateStatus = ''
-
   @observable
   loading = false
 
   @action
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    const { form } = this.props
+    const { validateFields } = form
+    validateFields((err, values) => {
       if (!err) {
         this.login(values)
         this.loading = true
