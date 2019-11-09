@@ -28,11 +28,15 @@ const requestErroHandler = error => {
 }
 
 const responseHandler = response => {
-  stopLoading()
+  // stopLoading()
 
   window.cancelTokenList = window.cancelTokenList.filter(
     item => item.token !== response.config.cancelToken
   )
+
+  if (window.cancelTokenList.length === 0) {
+    stopLoading()
+  }
 
   // const { status } = response
 
@@ -65,7 +69,7 @@ const responseErrorHandler = error => {
   stopLoading()
 
   // Catcher(error.response, true)
-  console.log(error.response, true)
+  throw new Error(error)
 }
 
 instance.interceptors.request.use(requestHandler, requestErroHandler)

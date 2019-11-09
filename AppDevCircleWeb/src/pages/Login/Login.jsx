@@ -18,8 +18,8 @@ class Login extends Component {
   componentDidMount() {
     document.title = '登录页'
     // localStorage.removeItem('token')
-    const { history } = this.props
-    console.log(history)
+    // const { history } = this.props
+    // console.log(history)
   }
 
   // @action

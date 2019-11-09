@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../style/loginhead.scss'
+import draw from '@assets/img/draw.png'
 
 class Loginhead extends Component {
 
@@ -7,7 +8,7 @@ class Loginhead extends Component {
     return (
       <header className="loginHeader">
         <img alt="logo"
-          src={require('../style/img/draw.png')}
+          src={draw}
         />
         <button>注册</button>
       </header>

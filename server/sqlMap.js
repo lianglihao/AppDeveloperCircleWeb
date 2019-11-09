@@ -12,7 +12,7 @@ const sqlMap = {
   getFriends: 'SELECT friendsid FROM Users WHERE token = ?',
 
   // 获取用户基础信息（头像）
-  getPicture: 'SELECT uname, uidentity, picture FROM Users WHERE uidentity = ?',
+  getPicture: 'SELECT uname, uidentity, avatar FROM Users WHERE uidentity = ?',
 
   // setUpdate: 'UPDATE content SET title = ?,detailed= ?  WHERE id=?',
   // getContentAll: 'SELECT * FROM content WHERE userid = ? ORDER BY time DESC limit 12',
