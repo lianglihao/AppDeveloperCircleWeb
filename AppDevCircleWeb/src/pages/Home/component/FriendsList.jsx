@@ -52,20 +52,42 @@ class FriendsList extends Component {
           className="demo-loadmore-list"
           dataSource={friends}
           itemLayout="horizontal"
-          renderItem={item => (
-            <List.Item
-              actions={this.actions(item)}
-            >
-              <List.Item.Meta
-                avatar={
-                  <Avatar src={item.picture} />
+          renderItem={item => {
+            return (
+              <>
+                {item ?
+                  <List.Item
+                    actions={this.actions(item)}
+                  >
+                    <List.Item.Meta
+                      avatar={
+                        <Avatar src={item.picture} />
+                      }
+                      description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                      // title={<a href="https://ant.design">{item.name.last}</a>}
+                      title={item.uname}
+                    />
+                  </List.Item> : <p>无好友</p>
                 }
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                // title={<a href="https://ant.design">{item.name.last}</a>}
-                title={item.uname}
-              />
-            </List.Item>
-          )}
+              </>
+            )
+          }
+
+          //   (
+          //   <List.Item
+          //     actions={this.actions(item)}
+          //   >
+          //     <List.Item.Meta
+          //       avatar={
+          //         <Avatar src={item.picture} />
+          //       }
+          //       description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          //       // title={<a href="https://ant.design">{item.name.last}</a>}
+          //       title={item.uname}
+          //     />
+          //   </List.Item>
+          // )
+          }
         />
       </div>
     )
